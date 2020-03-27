@@ -47,7 +47,7 @@ const Register = props => {
           ...data,
           err: response.data
         });
-        console.log("in err", this.state.err);
+      //  console.log("in err", this.state.err);
 
         //  document.getElementById("emaill").innerHTML="email already exists"
       } else if (response.data == "user created") {
