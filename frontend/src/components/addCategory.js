@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
+import {useSelector,useDispatch} from "react-redux";
+
 
 // class AddCategory extends React.Component {
 //   constructor(props) {
@@ -11,6 +13,7 @@ import axios from "axios";
 //   }
 
 const AddCategory = props => {
+  const dispatch=useDispatch();
   const [addcat, setaddcat] = useState({
     name: "",
     image: ""
@@ -22,13 +25,15 @@ const AddCategory = props => {
     axios
       .post("http://localhost:8969/addcats", formdata)
       .then(result => {
-        alert("succesfully added category");
+       // alert("succesfully added category");
         props.changeCatState();
         props.getCategory();
       })
       .catch(err => {
         console.log(err);
       });
+      
+      // dispatch({type:"ADD_CATEGORY",payload:addcat})
   };
   const handlechange = event => {
     // const name = event.target.name;

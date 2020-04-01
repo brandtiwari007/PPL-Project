@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import axios from "axios";
 import { BrowserRouter } from "react-router-dom";
 import { Link } from "react-router-dom";
-
+import { connect, useSelector, useDispatch } from "react-redux";
+import {loginf} from "../redux/action/loginAction"; 
 // export default class Login extends React.Component {
 //   constructor(props) {
 // //    {this.props.username}
@@ -15,6 +16,11 @@ import { Link } from "react-router-dom";
 //     };
 //   }
 const Login = props => {
+  let dispatch = useDispatch();
+  const loggedIn = useSelector(state => {
+    console.log("here state is :", state);
+    return state.categories;
+  });
   const [data, setData] = useState({
     password: "",
     email: "",
@@ -39,6 +45,7 @@ const Login = props => {
         console.log(response.data, "this is data of login");
       } else {
         console.log("logged in");
+        dispatch(loginf("hlw"));
         console.log("here are props", props);
         props.history.push("/timeline", {});
 

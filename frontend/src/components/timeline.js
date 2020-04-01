@@ -6,6 +6,7 @@ import Axios from "axios";
 import singlePost from "./singlepost";
 import AddCategory from "./addCategory";
 import { relativeTimeThreshold } from "moment";
+import { useSelector, useDispatch } from "react-redux";
 
 // export default class Timeline extends React.Component {
 //   constructor(props) {
@@ -22,6 +23,8 @@ import { relativeTimeThreshold } from "moment";
 //     };
 //   }
 const Timeline = props => {
+  const dispatch = useDispatch();
+
   const [adddata, setdata] = useState({
     count: false,
     cat: false,
@@ -71,7 +74,9 @@ const Timeline = props => {
         // this.setState({
         //   categories: response.data
         // });
-        setCategories(response.data);
+        dispatch({ type: "ADD_CATEGORY", payload: response.data });
+
+        //setCategories(response.data);
       }
     });
   };
@@ -424,7 +429,6 @@ const Timeline = props => {
                 {adddata.img.map((value, index) => {
                   return (
                     <div className="contnt_2">
-                      
                       <div className="div_a">
                         <div className="div_title">{value.title}</div>
                         <div className="btm_rgt">

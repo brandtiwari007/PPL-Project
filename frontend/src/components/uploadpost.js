@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
 //import AddCategory from 'addCategory';
 // class Upload extends React.Component {
@@ -15,6 +16,10 @@ import axios from "axios";
 //   }
 
 const Upload = props => {
+  const categorydetail = useSelector(state => {
+    console.log(state,"testing*************");
+    return state.categoryreducer.categories
+  });
   const [up, setUpl] = useState({
     image: "",
     title: "",
@@ -105,9 +110,12 @@ const Upload = props => {
           <li>
             <span>Category</span>
             <select name="category" onChange={handlecategory}>
-              {cat.map((data, index) => {
-                return <option value={data.name}> {data.name} </option>;
-              })}
+              {/* {cat.map((data, index) => { */}
+                {/* return <option value={data.name}> {data.name} </option>; */}
+                { categorydetail.map((data,index) =>{
+                  return <option value={data.name}>{data.name}</option>
+                })}
+              
             </select>
           </li>
           <input type="submit" />
