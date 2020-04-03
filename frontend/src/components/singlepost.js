@@ -10,6 +10,8 @@ import axios from "axios";
 //       likes: []
 //     };
 //   }
+
+
 const SinglePost = props => {
   console.log(props, "tiwari ji ke props");
   const [data, setData] = useState({
@@ -103,6 +105,10 @@ const SinglePost = props => {
       document.getElementById("clear").value = "";
     });
   };
+  const signout = event => {
+    localStorage.clear();
+    props.history.push("/login");
+  };
   const handleSignout = event => {
     event.preventDefault();
   };
@@ -180,7 +186,7 @@ const SinglePost = props => {
                 </li>
                 <li className>
                   {" "}
-                  <a href>Resuse Market</a>{" "}
+                  <a href onClick={signout}> sign out</a>{" "}
                 </li>
                 <li className>
                   {" "}
@@ -212,7 +218,7 @@ const SinglePost = props => {
                 <a href="#">E-Brands </a>
               </li>
               <li>
-                <a href="#"> Resuse Market </a>
+                <a href="#" onClick={signout}> sign out </a>
               </li>
               <li></li>
             </ul>

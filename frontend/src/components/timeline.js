@@ -7,6 +7,7 @@ import singlePost from "./singlepost";
 import AddCategory from "./addCategory";
 import { relativeTimeThreshold } from "moment";
 import { useSelector, useDispatch } from "react-redux";
+import { categoryAction } from "../redux/action/categoryaction";
 
 // export default class Timeline extends React.Component {
 //   constructor(props) {
@@ -24,6 +25,10 @@ import { useSelector, useDispatch } from "react-redux";
 //   }
 const Timeline = props => {
   const dispatch = useDispatch();
+  const categories = useSelector(state => {
+    console.log(state);
+    return state.categoryreducer.categories;
+  });
 
   const [adddata, setdata] = useState({
     count: false,
@@ -34,7 +39,7 @@ const Timeline = props => {
     likes: [],
     comment: []
   });
-  const [categories, setCategories] = useState([]);
+  // const [categories, setCategories] = useState([]);
 
   const uploadpost = event => {
     //console.log("upload", this.state.count);
@@ -69,16 +74,18 @@ const Timeline = props => {
 
   const getCategory = () => {
     console.log("asdasdadads>>>>>>>>>>>");
-    Axios.get("http://localhost:8969/getcats").then(response => {
-      if (response.data) {
-        // this.setState({
-        //   categories: response.data
-        // });
-        dispatch({ type: "ADD_CATEGORY", payload: response.data });
+    // Axios.get("http://localhost:8969/getcats").then(response => {
+    //  // if (response.data) {
+    //     // this.setState({
+    //     //   categories: response.data
+    //     // });
+    //     //dispatch({ type: "ADD_CATEGORY", payload: response.data });
 
-        //setCategories(response.data);
-      }
-    });
+    //     // setCategories(response.data);
+    //   }
+    dispatch(categoryAction(dispatch));
+    //   );
+    // };
   };
   const handleImg = value => {
     console.log("this is value", value);
