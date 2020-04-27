@@ -12,9 +12,8 @@ var catschema = require("../schema/addcategoryschema");
 router.post("/upload", upload.single("image"), (req, res) => {
   console.log("coming from axios", req.body);
   const obj = req.body;
-  //changes for react native project
-  //  obj.date = new Date().toString().slice(4, 16);
-  //  obj.time = new Date().toString().slice(16, 21);
+  obj.date = new Date().toString().slice(4, 16);
+  obj.time = new Date().toString().slice(16, 21);
   obj.image = req.file.filename;
   console.log("+++++++++++++", req.file.filename);
   schema2.create(obj, (err, data) => {
@@ -22,18 +21,15 @@ router.post("/upload", upload.single("image"), (req, res) => {
       console.log(err);
     } else {
       console.log("data inserted", data);
-      //changes
-      res.send(data)
     }
   });
-  //here changes for react-native project
-  // let data1 = schema2.find({}, (err, result) => {
-  //   if (err) res.send(err);
-  //   else {
-  //     console.log("sending image", result);
-  //     res.send(result);
-  //   }
-  // });
+  let data1 = schema2.find({}, (err, result) => {
+    if (err) res.send(err);
+    else {
+      console.log("sending image", result);
+      res.send(result);
+    }
+  });
 });
 
 router.post("/signup", async (req, res) => {
